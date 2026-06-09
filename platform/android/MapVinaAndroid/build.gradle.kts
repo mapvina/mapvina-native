@@ -44,7 +44,7 @@ dokka {
             includes.from("Module.md")
 
             sourceLink {
-                remoteUrl.set(uri("https://github.com/Sunny0025-IT/mapvina-native/tree/main/platform/android/"))
+                remoteUrl.set(uri("https://github.com/mapvina/mapvina-native/tree/main/platform/android/"))
                 localDirectory.set(rootDir)
             }
 
