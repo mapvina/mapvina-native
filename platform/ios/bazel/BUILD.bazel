@@ -1,0 +1,7 @@
+config_setting(
+    name = "ios_simulator_config",
+    values = {
+        "apple_platform_type": "ios_simulator",
+    },
+    visibility = ["//visibility:public"],
+)

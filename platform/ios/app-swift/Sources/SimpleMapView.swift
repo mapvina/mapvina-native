@@ -6,6 +6,7 @@ import UIKit
 struct SimpleMap: UIViewRepresentable {
     func makeUIView(context _: Context) -> MLNMapView {
         let mapView = MLNMapView()
+        mapView.styleURL = MAPVINA_STREETS_STYLE
         return mapView
     }
 
