@@ -22,16 +22,22 @@ struct MapVinaNavigationView: View {
                 }
                 #if MLN_RENDER_BACKEND_METAL
                     NavigationLink("CustomStyleLayer (Metal)") {
-                        CustomStyleLayerExam                        CustomStyleLayerExam                        CustomStyleLayerExam               onLink("LineTapMap") {
-                    LineTapMap().edg      ringSafeArea(.all)
-                                  NavigationLink("LocationPrivacyExample") {
-                    LocationPrivacyExampleView()
-                                                                          ) {
-                    BlockingGesturesExample()                 }
-                NavigationLink("MaximumScreenBoundsExample") {
-                                             e()
+                        CustomStyleLayerExample().edgesIgnoringSafeArea(.all)
+                    }
+                #endif
+                NavigationLink("LineTapMap") {
+                    LineTapMap().edgesIgnoringSafeArea(.all)
                 }
-                Nav               neStyleLayerExample") {
+                NavigationLink("LocationPrivacyExample") {
+                    LocationPrivacyExampleView()
+                }
+                NavigationLink("BlockingGesturesExample") {
+                    BlockingGesturesExample()
+                }
+                NavigationLink("MaximumScreenBoundsExample") {
+                    MaximumScreenBoundsExample()
+                }
+                NavigationLink("LineStyleLayerExample") {
                     LineStyleLayerExampleUIViewControllerRepresentable()
                 }
                 NavigationLink("WebAPIDataExample") {
@@ -47,7 +53,8 @@ struct MapVinaNavigationView: View {
                     ObserverExampleViewUIViewControllerRepresentable()
                 }
                 Group {
-                                                                                       matedLineExampleUIViewControllerRepresentable()
+                    NavigationLink("AnimatedLineExample") {
+                        AnimatedLineExampleUIViewControllerRepresentable()
                     }
                     NavigationLink("AnnotationViewExample") {
                         AnnotationViewExampleUIViewControllerRepresentable()
@@ -62,11 +69,19 @@ struct MapVinaNavigationView: View {
                         DDSCircleLayerExampleUIViewControllerRepresentable().edgesIgnoringSafeArea(.all)
                     }
                     NavigationLink("POIAlongRouteExample") {
-                                                                                                }
+                        POIAlongRouteExampleUIViewControllerRepresentable()
+                    }
                     NavigationLink("ManageOfflineRegionsExample") {
                         ManageOfflineRegionsExampleUIViewControllerRepresentable()
                     }
-                    Na                    Na                    Na               le"                    Na                    Na                    Na         ()                     }                    Na                    Na              ")                     Na                    Na                    Na        le                SafeAr                    Na                    Na                 }
+                    NavigationLink("OfflinePackExampleUIViewControllerRepresentable") {
+                        OfflinePackExampleUIViewControllerRepresentable()
+                    }
+                    NavigationLink("MultipleImagesExample") {
+                        MultipleImagesExampleUIViewControllerRepresentable().edgesIgnoringSafeArea(.all)
+                    }
+                }
+            }
         }
     }
 }
