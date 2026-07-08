@@ -30,7 +30,10 @@ afterEvaluate {
         signAllPublications()
     }
     
-    val privateKeyFile = file("/Volumes/DATA/MapVina/private-key.asc")
+    val signingKeyPath = (project.findProperty("signing.secretKeyFile") as String?)
+        ?: System.getenv("SIGNING_SECRET_KEY_FILE")
+        ?: "${System.getProperty("user.home")}/.mapvina-secrets/private-key.asc"
+    val privateKeyFile = file(signingKeyPath)
     if (privateKeyFile.exists()) {
         val privateKey = privateKeyFile.readText()
         val password = project.findProperty("signing.password") as String? ?: System.getenv("SIGNING_PASSWORD")
