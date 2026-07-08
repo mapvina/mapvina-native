@@ -146,6 +146,7 @@ dependencies {
 
     implementation(libs.mapvinaNavigation) {
         exclude(group = "io.github.mapvina", module = "android-sdk")
+        exclude(group = "io.github.mapvina", module = "android-sdk-opengl")
     }
 
     implementation(libs.mapvinaJavaTurf)

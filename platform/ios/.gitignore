@@ -37,7 +37,7 @@ test/fixtures/storage/assets.zip
 /vendor/.cache
 buck-out
 .buckd
-MapLibre.xcodeproj
+MapVina.xcodeproj
 .docc-build
 
 # Visual Studio Code

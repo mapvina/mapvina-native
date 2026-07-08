@@ -105,7 +105,7 @@ CPP_FLAGS = select({
     "@platforms//os:windows": MSVC_CPP_FLAGS + WARNING_FLAGS["windows"],
 })
 
-# Compilation flags related to the Maplibre codebase. Relevant for all .cpp .mm and .m code
+# Compilation flags related to the Mapvina codebase. Relevant for all .cpp .mm and .m code
 #  - src/*
 #  - include/*
 #  - platform/*

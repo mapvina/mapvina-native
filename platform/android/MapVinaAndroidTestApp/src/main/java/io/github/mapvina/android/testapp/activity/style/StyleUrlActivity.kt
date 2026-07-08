@@ -50,7 +50,12 @@ class StyleUrlActivity : AppCompatActivity() {
 
         mapView.getMapAsync { map ->
             mapVinaMap = map
-            map.setStyle(Style.Builder().fromUri(urlInput.text.toString()))
+            map.setStyle(Style.Builder().fromUri(urlInput.text.toString())) {
+                // Set attribution gravity after style is loaded
+                map.uiSettings.setAttributionGravity(android.view.Gravity.BOTTOM or android.view.Gravity.END)
+                val margin = (16 * resources.displayMetrics.density).toInt()
+                map.uiSettings.setAttributionMargins(margin, margin, margin, margin)
+            }
         }
 
         loadButton.setOnClickListener {
