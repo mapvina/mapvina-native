@@ -5,7 +5,7 @@ MapVina welcomes participation and contributions from everyone. Please read [`Ma
 ## 1.0.1
 
 - Replace legacy map and snapshot logos with the MapVina Brand Kit v1.0 horizontal logo and compact icon.
-- Add a high-contrast translucent badge for reliable visibility across map styles.
+- Keep the MapVina logo canvas transparent so the underlying map remains visible across map styles.
 - Correct the MapVina logo accessibility label and retain compatibility aliases for the previous asset names.
 - Fix dynamic XCFramework linking against the Xcode 26 simulator SDK by resolving unavailable Metal constants dynamically.
 - Gate GitHub release publication on successful CocoaPods and Swift Package distribution releases.

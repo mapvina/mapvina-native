@@ -5,13 +5,13 @@
 ### ✨ Features and improvements
 
 - Replace legacy map ornaments and snapshot logos with the MapVina Brand Kit v1.0 horizontal logo and compact icon.
-- Add a high-contrast translucent badge so MapVina branding remains legible across light, dark, and satellite styles.
+- Keep the MapVina logo canvas transparent so the map remains visible behind the branding across light, dark, and satellite styles.
 - Make the Android release workflow use GitHub-hosted runners and gate the public release on all Maven Central publications.
 
 ### 🐞 Bug fixes
 
 - Preserve the public `mapvina_logo_icon` resource while correcting the interactive map logo aspect ratio.
-- Correct compact snapshot measurement so narrow snapshots select the new icon badge instead of dropping the logo.
+- Correct compact snapshot measurement so narrow snapshots select the new icon instead of dropping the logo.
 - Remove duplicate Finder conflict copies of the legacy Android map logo assets.
 
 ## 1.0.1
