@@ -30,7 +30,7 @@ def svg_inner(path: Path) -> str:
     return match.group(1)
 
 
-def write_badge(
+def write_asset(
     source_name: str,
     output_name: str,
     source_width: float,
@@ -48,15 +48,13 @@ def write_badge(
     output = (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{badge_width}" '
         f'height="{badge_height}" viewBox="0 0 {badge_width} {badge_height}">'
-        f'<rect width="{badge_width}" height="{badge_height}" rx="4" '
-        'fill="#FFFFFF" fill-opacity="0.9"/>'
         f'<g transform="translate({offset_x} {offset_y}) scale({scale_x} {scale_y})">'
         f'{inner}</g></svg>\n'
     )
     (generated_dir / output_name).write_text(output, encoding="utf-8")
 
 
-write_badge(
+write_asset(
     "logo-horizontal-primary.svg",
     "mapvina-logo-horizontal-primary.svg",
     460,
@@ -68,7 +66,7 @@ write_badge(
     6,
     4,
 )
-write_badge(
+write_asset(
     "icon-primary.svg",
     "mapvina-icon-primary.svg",
     220,

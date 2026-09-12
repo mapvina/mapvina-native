@@ -1,8 +1,8 @@
 # MapVina native map branding
 
 The files in `source/` are the canonical MapVina Brand Kit v1.0 SVG assets used by
-the Android and iOS map ornaments. Generated badge assets use a 90% opaque white
-background with a 4 dp/pt corner radius.
+the Android and iOS map ornaments. Generated assets preserve the brand artwork
+and padding while keeping the surrounding canvas fully transparent.
 
 Regenerate checked-in Android and iOS assets from the repository root:
 

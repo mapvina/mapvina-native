@@ -28,7 +28,7 @@ public class LogoTest extends EspressoTest {
   }
 
   @Test
-  public void testUsesHorizontalBrandBadge() {
+  public void testUsesHorizontalBrandLogo() {
     validateTestSetup();
     onView(withTagValue(is("logoView"))).check((view, noViewFoundException) ->
             assertTrue("MapVina logo should be wider than it is tall", view.getWidth() > view.getHeight()));
