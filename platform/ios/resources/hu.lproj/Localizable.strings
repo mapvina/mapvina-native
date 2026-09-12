@@ -41,7 +41,7 @@
 "LOAD_STYLE_FAILED_DESC" = "Nem sikerült betölteni a térképet, mert a stílust nem lehetett betölteni.";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "Térkép";

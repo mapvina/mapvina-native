@@ -15,8 +15,60 @@ on:
         default: ''
         description: Version (only for pre-releases)
 
+concurrency:
+  group: ios-release
+  cancel-in-progress: false
+
 jobs:
+  ios-release-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify release commit belongs to main
+        run: |
+          git fetch origin main --no-tags
+          if ! git merge-base --is-ancestor "${GITHUB_SHA}" origin/main; then
+            echo "::error::iOS releases must point to a commit already merged into main."
+            exit 1
+          fi
+
+      - name: Validate release version and changelog
+        run: |
+          if [ "${{ inputs.release }}" = "full" ]; then
+            .github/scripts/validate-version.sh platform/ios/VERSION
+            version="$(cat platform/ios/VERSION)"
+            if ! grep -Fqx "## $version" platform/ios/CHANGELOG.md; then
+              echo "::error::Missing exact changelog heading: ## $version"
+              exit 1
+            fi
+          elif [[ -n "${{ inputs.pre_release_version }}" && "${{ inputs.pre_release_version }}" != *pre* ]]; then
+            echo "::error::Pre-release version must include 'pre'."
+            exit 1
+          fi
+
+      - name: Verify iOS release credentials and distribution access
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+          GH_TOKEN: ${{ secrets.MAPVINA_RELEASE_TOKEN }}
+        run: |
+          if [ -z "$COCOAPODS_TRUNK_TOKEN" ]; then
+            echo "::error::Missing required secret: COCOAPODS_TRUNK_TOKEN"
+            exit 1
+          fi
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::Missing required secret: MAPVINA_RELEASE_TOKEN"
+            exit 1
+          fi
+          if [ "$(gh api repos/mapvina/mapvina-gl-native-distribution --jq '.permissions.push // false')" != "true" ]; then
+            echo "::error::MAPVINA_RELEASE_TOKEN cannot write mapvina-gl-native-distribution."
+            exit 1
+          fi
+
   ios-build-dynamic:
+    needs: ios-release-preflight
     runs-on: macos-14
     defaults:
       run:
@@ -59,6 +111,7 @@ jobs:
             MapVina_ios_device.framework.dSYM.zip
 
   ios-build-static:
+    needs: ios-release-preflight
     runs-on: macos-14
     defaults:
       run:
@@ -89,11 +142,13 @@ jobs:
           path: |
             MapVina.static.xcframework.zip
 
-  ios-release:
+  ios-stage-release:
     permissions:
-      contents: write         # allow making a release
-      actions: write          # for triggering ios-release-cocoapods.yml
-      issues: write           # for notify-release-on-prs.ts
+      contents: write
+    outputs:
+      version: ${{ steps.normalized_release.outputs.version }}
+      tag: ${{ steps.normalized_release.outputs.tag }}
+      final_prerelease: ${{ steps.normalized_release.outputs.final_prerelease }}
     runs-on: ubuntu-latest
     needs:
       - ios-build-dynamic
@@ -114,12 +169,17 @@ jobs:
           node-version-file: ".nvmrc"
 
       - name: Get version (release)
+        id: release_version
         if: github.event.inputs.release == 'full'
         run: |
-          echo version="$(head VERSION)" >> "$GITHUB_ENV"
-          echo changelog_version_heading="## $(head VERSION)" >> "$GITHUB_ENV"
+          version="$(head VERSION)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=ios-v$version" >> "$GITHUB_OUTPUT"
+          echo "changelog_version_heading=## $version" >> "$GITHUB_OUTPUT"
+          echo "final_prerelease=false" >> "$GITHUB_OUTPUT"
 
       - name: Get version (pre-release)
+        id: prerelease_version
         if: github.event.inputs.release == 'pre'
         run: |
           version="${{ github.event.inputs.pre_release_version }}"
@@ -130,66 +190,151 @@ jobs:
             echo "::error::Pre-release version must include 'pre' (Current version: $version)"
             exit 1
           fi
-          echo version="$version" >> "$GITHUB_ENV"
-          echo changelog_version_heading="## main" >> "$GITHUB_ENV"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=ios-v$version" >> "$GITHUB_OUTPUT"
+          echo "changelog_version_heading=## main" >> "$GITHUB_OUTPUT"
+          echo "final_prerelease=true" >> "$GITHUB_OUTPUT"
+
+      - name: Normalize release outputs
+        id: normalized_release
+        run: |
+          if [ "${{ github.event.inputs.release }}" = "full" ]; then
+            echo "version=${{ steps.release_version.outputs.version }}" >> "$GITHUB_OUTPUT"
+            echo "tag=${{ steps.release_version.outputs.tag }}" >> "$GITHUB_OUTPUT"
+            echo "changelog_version_heading=${{ steps.release_version.outputs.changelog_version_heading }}" >> "$GITHUB_OUTPUT"
+            echo "final_prerelease=${{ steps.release_version.outputs.final_prerelease }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=${{ steps.prerelease_version.outputs.version }}" >> "$GITHUB_OUTPUT"
+            echo "tag=${{ steps.prerelease_version.outputs.tag }}" >> "$GITHUB_OUTPUT"
+            echo "changelog_version_heading=${{ steps.prerelease_version.outputs.changelog_version_heading }}" >> "$GITHUB_OUTPUT"
+            echo "final_prerelease=${{ steps.prerelease_version.outputs.final_prerelease }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Export normalized release outputs
+        run: |
+          echo "version=${{ steps.normalized_release.outputs.version }}" >> "$GITHUB_ENV"
+          echo "tag=${{ steps.normalized_release.outputs.tag }}" >> "$GITHUB_ENV"
+          echo "changelog_version_heading=${{ steps.normalized_release.outputs.changelog_version_heading }}" >> "$GITHUB_ENV"
+          echo "final_prerelease=${{ steps.normalized_release.outputs.final_prerelease }}" >> "$GITHUB_ENV"
 
       - name: Create tag if it does not exist
         working-directory: .
-        run: .github/scripts/ensure-tag.sh ios-v${{ env.version }} ${{ github.sha }}
+        run: .github/scripts/ensure-tag.sh ${{ env.tag }} ${{ github.sha }}
 
       - name: Extract changelog for version
         run: |
           awk '/^##/ { p = 0 }; p == 1 { print }; $0 == "${{ env.changelog_version_heading }}" { p = 1 };' CHANGELOG.md > changelog_for_version.md
           cat changelog_for_version.md
 
-      - name: Release (GitHub) - Create Draft
+      - name: Stage public GitHub pre-release
         id: github_release
         uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2.6.1
         with:
-          name: ios-v${{ env.version }}
+          name: ${{ env.tag }}
           files: |
             xcframework/MapVina.dynamic.xcframework.zip
             xcframework/MapVina_ios_device.framework.dSYM.zip
             xcframework-static/MapVina.static.xcframework.zip
-          tag_name: ios-v${{ env.version }}
-          prerelease: ${{ github.event.inputs.release == 'pre' }}
+          tag_name: ${{ env.tag }}
+          prerelease: true
           body_path: platform/ios/changelog_for_version.md
           fail_on_unmatched_files: true
-          draft: true
 
-      - name: Release (Swift Package Index)
-        run: |
-          release_workflow_id=81221759  # id of release.yml in mapvina-gl-native-distribution
-          curl -L \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/repos/mapvina/mapvina-gl-native-distribution/actions/workflows/$release_workflow_id/dispatches \
-            -d '{"ref":"main","inputs":{
-              "changelog_url": "https://github.com/mapvina/mapvina-native/releases/tag/ios-v${{ env.version }}",
-              "version":"${{ env.version }}",
-              "download_url": "https://github.com/mapvina/mapvina-native/releases/download/ios-v${{ env.version }}/MapVina.dynamic.xcframework.zip"}}'
-
-      - run: npm install
-        working-directory: .
-
-      - name: Release (CocoaPods)
-        shell: bash -leo pipefail {0}  # so pod is found
-        run: gh workflow run ios-release-cocoapods.yml --field version=${{ env.version }}
-        env:
-         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish release (remove draft)
-        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2.6.1
+  ios-release-cocoapods:
+    needs: ios-stage-release
+    runs-on: macos-14
+    defaults:
+      run:
+        working-directory: platform/ios
+        shell: bash -leo pipefail {0}
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
         with:
-          tag_name: ios-v${{ env.version }}
-          name: ios-v${{ env.version }}
-          draft: false
+          persist-credentials: false
+
+      - name: Validate CocoaPods specification
+        run: VERSION=${{ needs.ios-stage-release.outputs.version }} pod spec lint MapVina.podspec --allow-warnings
+
+      - name: Publish CocoaPods specification
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+        run: VERSION=${{ needs.ios-stage-release.outputs.version }} pod trunk push MapVina.podspec --allow-warnings
+
+  ios-release-spm:
+    needs: ios-stage-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch Swift Package distribution release
+        env:
+          GH_TOKEN: ${{ secrets.MAPVINA_RELEASE_TOKEN }}
+          VERSION: ${{ needs.ios-stage-release.outputs.version }}
+          TAG: ${{ needs.ios-stage-release.outputs.tag }}
+        run: |
+          set -euo pipefail
+          dispatched_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          gh workflow run release.yml \
+            --repo mapvina/mapvina-gl-native-distribution \
+            --ref main \
+            --field version="$VERSION" \
+            --field changelog_url="https://github.com/mapvina/mapvina-native/releases/tag/$TAG" \
+            --field download_url="https://github.com/mapvina/mapvina-native/releases/download/$TAG/MapVina.dynamic.xcframework.zip"
+
+          run_id=""
+          for _ in $(seq 1 30); do
+            run_id="$(gh run list \
+              --repo mapvina/mapvina-gl-native-distribution \
+              --workflow release.yml \
+              --event workflow_dispatch \
+              --limit 20 \
+              --json databaseId,createdAt,displayTitle | \
+              jq -r --arg since "$dispatched_at" --arg title "release-$VERSION" \
+                '[.[] | select(.createdAt >= $since and .displayTitle == $title)] | sort_by(.createdAt) | last | .databaseId // empty')"
+            [ -n "$run_id" ] && break
+            sleep 10
+          done
+
+          if [ -z "$run_id" ]; then
+            echo "Unable to locate the Swift Package distribution workflow run." >&2
+            exit 1
+          fi
+
+          gh run watch "$run_id" --repo mapvina/mapvina-gl-native-distribution --exit-status
+          gh api "repos/mapvina/mapvina-gl-native-distribution/git/ref/tags/$VERSION" >/dev/null
+
+          expected_url="https://github.com/mapvina/mapvina-native/releases/download/$TAG/MapVina.dynamic.xcframework.zip"
+          package_manifest="$(gh api "repos/mapvina/mapvina-gl-native-distribution/contents/Package.swift?ref=$VERSION" --jq .content | base64 --decode)"
+          if ! grep -Fq "url: \"$expected_url\"" <<< "$package_manifest"; then
+            echo "Swift Package tag $VERSION does not reference $expected_url" >&2
+            exit 1
+          fi
+
+  ios-finalize-release:
+    permissions:
+      contents: write
+      issues: write
+    needs:
+      - ios-stage-release
+      - ios-release-cocoapods
+      - ios-release-spm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
+
+      - name: Finalize GitHub release state
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.ios-stage-release.outputs.tag }}
+          FINAL_PRERELEASE: ${{ needs.ios-stage-release.outputs.final_prerelease }}
+        run: |
+          release_id="$(gh api "repos/${{ github.repository }}/releases/tags/$TAG" --jq .id)"
+          gh api --method PATCH "repos/${{ github.repository }}/releases/$release_id" \
+            -F draft=false \
+            -F prerelease="$FINAL_PRERELEASE"
+
+      - run: npm ci
 
       - name: Write release notifications
         if: github.repository_owner == 'mapvina'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node .github/scripts/notify-release-on-prs.ts --tag ios-v${{ env.version }}
-        working-directory: .
+        run: node .github/scripts/notify-release-on-prs.ts --tag ${{ needs.ios-stage-release.outputs.tag }}

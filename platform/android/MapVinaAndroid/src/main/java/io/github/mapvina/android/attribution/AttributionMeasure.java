@@ -93,7 +93,7 @@ public class AttributionMeasure {
     @Nullable
     @Override
     public AttributionLayout execute(@NonNull AttributionMeasure measure) {
-      float width = measure.getLogoContainerWidth() + measure.getTextViewShortContainerWidth();
+      float width = measure.getLogoSmallContainerWidth() + measure.getTextViewShortContainerWidth();
       boolean fitBounds = width <= measure.getMaxSizeShort();
       if (fitBounds) {
         PointF anchor = calculateAnchor(measure.snapshot, measure.textViewShort, measure.margin);

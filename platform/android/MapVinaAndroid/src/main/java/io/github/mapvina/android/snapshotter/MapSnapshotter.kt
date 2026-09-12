@@ -615,7 +615,7 @@ open class MapSnapshotter(context: Context, options: Options) {
         val scale = calculateLogoScale(snapshot, logo)
         val matrix = Matrix()
         matrix.postScale(scale, scale)
-        val helmet = BitmapFactory.decodeResource(context.resources, R.drawable.mapvina_logo_helmet, null)
+        val helmet = context.resources.getDrawable(R.drawable.mapvina_logo_helmet, null)?.toBitmap()!!
         val large = Bitmap.createBitmap(logo, 0, 0, logo.width, logo.height, matrix, true)
         val small = Bitmap.createBitmap(helmet, 0, 0, helmet.width, helmet.height, matrix, true)
         return Logo(large, small, scale)

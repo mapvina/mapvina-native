@@ -61,7 +61,7 @@ class SequentialActivityTest(private val activity: Class<out Activity>) {
                 PackageManager.GET_ACTIVITIES
             )
 
-            val activities = packageInfo.activities
+            val activities = packageInfo.activities.orEmpty()
                 .filter { info ->
                     info.name.startsWith("io.github.mapvina.android.testapp.activity")
                 }

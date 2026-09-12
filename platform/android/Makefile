@@ -243,10 +243,10 @@ android-ui-test:
 run-android-test-app-center:
 	appcenter test run espresso --app "MapVina-mobile/Maps-sdk" --devices "MapVina-mobile/${devices}" --app-path MapVinaAndroidTestApp/build/outputs/apk/debug/MapVinaAndroidTestApp-debug.apk  --test-series "master" --locale "en_US" --build-dir MapVinaAndroidTestApp/build/outputs/apk/androidTest/debug --token ${APPCENTER_ACCESS_TOKEN}
 
-# Uploads the compiled Android SDK to Maven Central Staging
+# Uploads all six Android SDK publications and releases the Maven Central deployment
 .PHONY: run-android-publish
 run-android-publish:
-	$(MLN_ANDROID_GRADLE_SINGLE_JOB)-Pmapvina.abis=all :MapVinaAndroid:publishAllPublicationsToSonatypeRepository closeAndReleaseSonatypeStagingRepository
+	$(MLN_ANDROID_GRADLE_SINGLE_JOB)-Pmapvina.abis=all :MapVinaAndroid:publishAndReleaseToMavenCentral
 
 # Dump system graphics information for the test app
 .PHONY: android-gfxinfo

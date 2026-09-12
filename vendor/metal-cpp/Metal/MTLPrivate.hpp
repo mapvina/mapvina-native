@@ -24,6 +24,7 @@
 
 #include "MTLDefines.hpp"
 
+#include <TargetConditionals.h>
 #include <objc/runtime.h>
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +72,7 @@ namespace MTL::Private
     }
 } // MTL::Private
 
-#if defined(__MAC_26_0) || defined(__IPHONE_26_0) || defined(__TVOS_26_0)
+#if (defined(__MAC_26_0) || defined(__IPHONE_26_0) || defined(__TVOS_26_0)) && !TARGET_OS_SIMULATOR
 
 #define _MTL_PRIVATE_DEF_STR(type, symbol)                  \
     _MTL_EXTERN type const MTL##symbol _MTL_PRIVATE_IMPORT; \

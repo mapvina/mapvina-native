@@ -41,7 +41,7 @@
 "LOAD_STYLE_FAILED_DESC" = "El mapa no s’ha carregat perquè l’estil no es pot carregar.";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "Mapa";

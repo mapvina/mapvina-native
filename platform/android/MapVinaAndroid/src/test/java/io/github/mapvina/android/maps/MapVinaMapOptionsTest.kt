@@ -127,7 +127,7 @@ class MapVinaMapOptionsTest : BaseTest() {
     @Test
     fun testAttributionGravity() {
         Assert.assertEquals(
-            Gravity.BOTTOM or Gravity.START,
+            Gravity.BOTTOM or Gravity.END,
             MapVinaMapOptions().attributionGravity
         )
         Assert.assertEquals(

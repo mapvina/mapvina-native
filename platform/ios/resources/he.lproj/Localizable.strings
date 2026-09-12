@@ -44,7 +44,7 @@
 "LOAD_STYLE_FAILED_DESC" = "טעינת המפה נכשלה - לא ניתן לטעון את הסגנון.";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "מפה";

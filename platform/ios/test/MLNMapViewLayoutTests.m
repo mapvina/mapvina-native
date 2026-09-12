@@ -138,6 +138,13 @@
     XCTAssertEqualWithAccuracy(CGRectGetMinY(logoView.frame), expectedLogoOriginY, accuracy);
 }
 
+- (void)testLogoUsesHorizontalBrandBadge {
+    UIImageView *logoView = self.mapView.logoView;
+
+    XCTAssertEqualWithAccuracy(CGRectGetWidth(logoView.bounds), 108.0, 0.01);
+    XCTAssertEqualWithAccuracy(CGRectGetHeight(logoView.bounds), 31.0, 0.01);
+}
+
 - (NSArray *)makeTestDataListWithView:(UIView *)view margin:(CGFloat)margin {
     CGFloat bottomSafeAreaInset = 0.0;
     if (@available(iOS 11.0, *)) {

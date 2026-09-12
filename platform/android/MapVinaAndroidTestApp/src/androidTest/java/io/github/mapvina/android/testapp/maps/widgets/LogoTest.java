@@ -17,6 +17,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertTrue;
 
 public class LogoTest extends EspressoTest {
 
@@ -24,6 +25,13 @@ public class LogoTest extends EspressoTest {
   public void testDefault() {
     validateTestSetup();
     onView(withTagValue(is("logoView"))).check(matches(isDisplayed()));
+  }
+
+  @Test
+  public void testUsesHorizontalBrandBadge() {
+    validateTestSetup();
+    onView(withTagValue(is("logoView"))).check((view, noViewFoundException) ->
+            assertTrue("MapVina logo should be wider than it is tall", view.getWidth() > view.getHeight()));
   }
 
   @Test

@@ -791,7 +791,7 @@ NSArray<MLNAttributionInfo *> *MLNAttributionInfosFromAttributions(
       break;
     case MLNAttributionInfoStyleMedium:
 #if TARGET_OS_IPHONE
-      logoImage = [UIImage imageNamed:@"mapvina-logo-icon"
+      logoImage = [UIImage imageNamed:@"mapvina-icon-primary"
                                inBundle:[NSBundle mgl_frameworkBundle]
           compatibleWithTraitCollection:nil];
 #else
@@ -810,7 +810,7 @@ NSArray<MLNAttributionInfo *> *MLNAttributionInfosFromAttributions(
 + (MLNImage *)mapvinaLongStyleLogo {
   MLNImage *logoImage;
 #if TARGET_OS_IPHONE
-  logoImage = [UIImage imageNamed:@"mapvina-logo-stroke-gray"
+  logoImage = [UIImage imageNamed:@"mapvina-logo-horizontal-primary"
                            inBundle:[NSBundle mgl_frameworkBundle]
       compatibleWithTraitCollection:nil];
 #else

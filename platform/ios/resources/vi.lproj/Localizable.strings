@@ -44,7 +44,7 @@
 "LOAD_STYLE_FAILED_DESC" = "Bản đồ bị thất bại khi tải vì không thể tải bảng kiểu.";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "Bản đồ";

@@ -38,7 +38,7 @@
 "LOAD_STYLE_FAILED_DESC" = "Le chargement de la carte a échoué car le style n’a pas pu être chargé.";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "Carte";

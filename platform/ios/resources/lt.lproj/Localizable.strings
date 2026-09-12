@@ -41,7 +41,7 @@
 "LOAD_STYLE_FAILED_DESC" = "Nepavyko užkrauti žemėlapio, nes nepavyko užkrauti stiliaus.";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "Žemėlapis";

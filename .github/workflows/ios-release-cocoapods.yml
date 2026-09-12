@@ -18,7 +18,12 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Validate CocoaPods specification
+        shell: bash -leo pipefail {0}
+        run: VERSION=${{ inputs.version }} pod spec lint MapVina.podspec --allow-warnings
+
       - name: Release (CocoaPods)
-        shell: bash -leo pipefail {0}  # so pod is found
+        shell: bash -leo pipefail {0}
         run: |
-          VERSION=${{ github.event.inputs.version }} COCOAPODS_TRUNK_TOKEN=${{ secrets.COCOAPODS_PASSWORD }} pod trunk push MapVina.podspec
+          VERSION=${{ inputs.version }} COCOAPODS_TRUNK_TOKEN=${{ secrets.COCOAPODS_TRUNK_TOKEN }} \
+            pod trunk push MapVina.podspec --allow-warnings
