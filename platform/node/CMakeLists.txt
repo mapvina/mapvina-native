@@ -18,6 +18,7 @@ add_node_module(
         47
         48
         51
+        147 # Node.js 26 requires V8 APIs not yet supported by NAN 2.25.0.
 )
 
 if(WIN32)
