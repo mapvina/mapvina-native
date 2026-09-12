@@ -10,6 +10,7 @@ MapVina welcomes participation and contributions from everyone. Please read [`Ma
 - Fix dynamic XCFramework linking against the Xcode 26 simulator SDK by resolving unavailable Metal constants dynamically.
 - Gate GitHub release publication on successful CocoaPods and Swift Package distribution releases.
 - Run iOS verification on GitHub-hosted macOS runners and only package Device Farm uploads when AWS integration is configured.
+- Accept the legacy CocoaPods secret during the `1.0.1` transition while standardizing new releases on `COCOAPODS_TRUNK_TOKEN`.
 
 ## 6.26.0
 

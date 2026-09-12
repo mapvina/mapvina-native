@@ -51,7 +51,7 @@ jobs:
 
       - name: Verify iOS release credentials and distribution access
         env:
-          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN || secrets.COCOAPODS_PASSWORD }}
           GH_TOKEN: ${{ secrets.MAPVINA_RELEASE_TOKEN }}
         run: |
           if [ -z "$COCOAPODS_TRUNK_TOKEN" ]; then
@@ -257,7 +257,7 @@ jobs:
 
       - name: Publish CocoaPods specification
         env:
-          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN || secrets.COCOAPODS_PASSWORD }}
         run: VERSION=${{ needs.ios-stage-release.outputs.version }} pod trunk push MapVina.podspec --allow-warnings
 
   ios-release-spm:
