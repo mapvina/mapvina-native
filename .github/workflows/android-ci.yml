@@ -115,12 +115,16 @@ jobs:
 
       - name: Configure sccache
         run: |
-          echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
-          echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
-
-          if [ -z "${AWS_SECRET_ACCESS_KEY}" ]; then
-            echo "AWS_SECRET_ACCESS_KEY not set; not uploading sccache cache to S3"
-            echo SCCACHE_S3_NO_CREDENTIALS=1 >> "$GITHUB_ENV"
+          if [ -n "${AWS_SECRET_ACCESS_KEY:-}" ] && \
+             aws s3api head-bucket \
+               --bucket mapvina-native-sccache \
+               --region eu-central-1 2>/dev/null; then
+            echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
+            echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
+          else
+            echo "Remote sccache bucket unavailable; using the runner-local cache"
+            echo "SCCACHE_DIR=${RUNNER_TEMP}/sccache" >> "$GITHUB_ENV"
+            echo SCCACHE_CACHE_SIZE=2G >> "$GITHUB_ENV"
           fi
 
       - name: Check code style
@@ -244,12 +248,16 @@ jobs:
 
       - name: Configure sccache
         run: |
-          echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
-          echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
-
-          if [ -z "${AWS_SECRET_ACCESS_KEY}" ]; then
-            echo "AWS_SECRET_ACCESS_KEY not set; not uploading sccache cache to S3"
-            echo SCCACHE_S3_NO_CREDENTIALS=1 >> "$GITHUB_ENV"
+          if [ -n "${AWS_SECRET_ACCESS_KEY:-}" ] && \
+             aws s3api head-bucket \
+               --bucket mapvina-native-sccache \
+               --region eu-central-1 2>/dev/null; then
+            echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
+            echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
+          else
+            echo "Remote sccache bucket unavailable; using the runner-local cache"
+            echo "SCCACHE_DIR=${RUNNER_TEMP}/sccache" >> "$GITHUB_ENV"
+            echo SCCACHE_CACHE_SIZE=2G >> "$GITHUB_ENV"
           fi
 
       - name: Build C++ Unit Tests App
@@ -298,12 +306,16 @@ jobs:
 
       - name: Configure sccache
         run: |
-          echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
-          echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
-
-          if [ -z "${AWS_SECRET_ACCESS_KEY}" ]; then
-            echo "AWS_SECRET_ACCESS_KEY not set; not uploading sccache cache to S3"
-            echo SCCACHE_S3_NO_CREDENTIALS=1 >> "$GITHUB_ENV"
+          if [ -n "${AWS_SECRET_ACCESS_KEY:-}" ] && \
+             aws s3api head-bucket \
+               --bucket mapvina-native-sccache \
+               --region eu-central-1 2>/dev/null; then
+            echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
+            echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
+          else
+            echo "Remote sccache bucket unavailable; using the runner-local cache"
+            echo "SCCACHE_DIR=${RUNNER_TEMP}/sccache" >> "$GITHUB_ENV"
+            echo SCCACHE_CACHE_SIZE=2G >> "$GITHUB_ENV"
           fi
 
       - name: Build and Upload Render Test APKs (${{ matrix.flavor }})
@@ -339,12 +351,16 @@ jobs:
 
       - name: Configure sccache
         run: |
-          echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
-          echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
-
-          if [ -z "${AWS_SECRET_ACCESS_KEY}" ]; then
-            echo "AWS_SECRET_ACCESS_KEY not set; not uploading sccache cache to S3"
-            echo SCCACHE_S3_NO_CREDENTIALS=1 >> "$GITHUB_ENV"
+          if [ -n "${AWS_SECRET_ACCESS_KEY:-}" ] && \
+             aws s3api head-bucket \
+               --bucket mapvina-native-sccache \
+               --region eu-central-1 2>/dev/null; then
+            echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
+            echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
+          else
+            echo "Remote sccache bucket unavailable; using the runner-local cache"
+            echo "SCCACHE_DIR=${RUNNER_TEMP}/sccache" >> "$GITHUB_ENV"
+            echo SCCACHE_CACHE_SIZE=2G >> "$GITHUB_ENV"
           fi
 
       - name: Build WebGPU Dawn library for arm64-v8a
@@ -417,12 +433,16 @@ jobs:
 
       - name: Configure sccache
         run: |
-          echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
-          echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
-
-          if [ -z "${AWS_SECRET_ACCESS_KEY}" ]; then
-            echo "AWS_SECRET_ACCESS_KEY not set; not uploading sccache cache to S3"
-            echo SCCACHE_S3_NO_CREDENTIALS=1 >> "$GITHUB_ENV"
+          if [ -n "${AWS_SECRET_ACCESS_KEY:-}" ] && \
+             aws s3api head-bucket \
+               --bucket mapvina-native-sccache \
+               --region eu-central-1 2>/dev/null; then
+            echo SCCACHE_BUCKET=mapvina-native-sccache >> "$GITHUB_ENV"
+            echo SCCACHE_REGION=eu-central-1 >> "$GITHUB_ENV"
+          else
+            echo "Remote sccache bucket unavailable; using the runner-local cache"
+            echo "SCCACHE_DIR=${RUNNER_TEMP}/sccache" >> "$GITHUB_ENV"
+            echo SCCACHE_CACHE_SIZE=2G >> "$GITHUB_ENV"
           fi
 
       - name: Build WebGPU wgpu-native library for Android

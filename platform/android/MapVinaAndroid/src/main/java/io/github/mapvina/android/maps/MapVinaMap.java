@@ -2304,7 +2304,8 @@ public final class MapVinaMap {
    * any overload to activate the component,
    * then, enable it with {@link LocationComponent#setLocationComponentEnabled(boolean)}.
    * <p>
-   * You can customize the location icon and more with {@link io.github.mapvina.android.location.LocationComponentOptions}.
+   * You can customize the location icon and more with
+   * {@link io.github.mapvina.android.location.LocationComponentOptions}.
    *
    * @return the Location Component
    */
