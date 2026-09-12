@@ -36,15 +36,18 @@ jobs:
           fi
 
       - name: Validate release version and changelog
+        env:
+          RELEASE_TYPE: ${{ inputs.release }}
+          PRE_RELEASE_VERSION: ${{ inputs.pre_release_version }}
         run: |
-          if [ "${{ inputs.release }}" = "full" ]; then
+          if [ "$RELEASE_TYPE" = "full" ]; then
             .github/scripts/validate-version.sh platform/ios/VERSION
             version="$(cat platform/ios/VERSION)"
             if ! grep -Fqx "## $version" platform/ios/CHANGELOG.md; then
               echo "::error::Missing exact changelog heading: ## $version"
               exit 1
             fi
-          elif [[ -n "${{ inputs.pre_release_version }}" && "${{ inputs.pre_release_version }}" != *pre* ]]; then
+          elif [[ -n "$PRE_RELEASE_VERSION" && "$PRE_RELEASE_VERSION" != *pre* ]]; then
             echo "::error::Pre-release version must include 'pre'."
             exit 1
           fi
@@ -173,10 +176,12 @@ jobs:
         if: github.event.inputs.release == 'full'
         run: |
           version="$(head VERSION)"
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "tag=ios-v$version" >> "$GITHUB_OUTPUT"
-          echo "changelog_version_heading=## $version" >> "$GITHUB_OUTPUT"
-          echo "final_prerelease=false" >> "$GITHUB_OUTPUT"
+          {
+            echo "version=$version"
+            echo "tag=ios-v$version"
+            echo "changelog_version_heading=## $version"
+            echo "final_prerelease=false"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Get version (pre-release)
         id: prerelease_version
@@ -190,32 +195,40 @@ jobs:
             echo "::error::Pre-release version must include 'pre' (Current version: $version)"
             exit 1
           fi
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "tag=ios-v$version" >> "$GITHUB_OUTPUT"
-          echo "changelog_version_heading=## main" >> "$GITHUB_OUTPUT"
-          echo "final_prerelease=true" >> "$GITHUB_OUTPUT"
+          {
+            echo "version=$version"
+            echo "tag=ios-v$version"
+            echo "changelog_version_heading=## main"
+            echo "final_prerelease=true"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Normalize release outputs
         id: normalized_release
         run: |
           if [ "${{ github.event.inputs.release }}" = "full" ]; then
-            echo "version=${{ steps.release_version.outputs.version }}" >> "$GITHUB_OUTPUT"
-            echo "tag=${{ steps.release_version.outputs.tag }}" >> "$GITHUB_OUTPUT"
-            echo "changelog_version_heading=${{ steps.release_version.outputs.changelog_version_heading }}" >> "$GITHUB_OUTPUT"
-            echo "final_prerelease=${{ steps.release_version.outputs.final_prerelease }}" >> "$GITHUB_OUTPUT"
+            {
+              echo "version=${{ steps.release_version.outputs.version }}"
+              echo "tag=${{ steps.release_version.outputs.tag }}"
+              echo "changelog_version_heading=${{ steps.release_version.outputs.changelog_version_heading }}"
+              echo "final_prerelease=${{ steps.release_version.outputs.final_prerelease }}"
+            } >> "$GITHUB_OUTPUT"
           else
-            echo "version=${{ steps.prerelease_version.outputs.version }}" >> "$GITHUB_OUTPUT"
-            echo "tag=${{ steps.prerelease_version.outputs.tag }}" >> "$GITHUB_OUTPUT"
-            echo "changelog_version_heading=${{ steps.prerelease_version.outputs.changelog_version_heading }}" >> "$GITHUB_OUTPUT"
-            echo "final_prerelease=${{ steps.prerelease_version.outputs.final_prerelease }}" >> "$GITHUB_OUTPUT"
+            {
+              echo "version=${{ steps.prerelease_version.outputs.version }}"
+              echo "tag=${{ steps.prerelease_version.outputs.tag }}"
+              echo "changelog_version_heading=${{ steps.prerelease_version.outputs.changelog_version_heading }}"
+              echo "final_prerelease=${{ steps.prerelease_version.outputs.final_prerelease }}"
+            } >> "$GITHUB_OUTPUT"
           fi
 
       - name: Export normalized release outputs
         run: |
-          echo "version=${{ steps.normalized_release.outputs.version }}" >> "$GITHUB_ENV"
-          echo "tag=${{ steps.normalized_release.outputs.tag }}" >> "$GITHUB_ENV"
-          echo "changelog_version_heading=${{ steps.normalized_release.outputs.changelog_version_heading }}" >> "$GITHUB_ENV"
-          echo "final_prerelease=${{ steps.normalized_release.outputs.final_prerelease }}" >> "$GITHUB_ENV"
+          {
+            echo "version=${{ steps.normalized_release.outputs.version }}"
+            echo "tag=${{ steps.normalized_release.outputs.tag }}"
+            echo "changelog_version_heading=${{ steps.normalized_release.outputs.changelog_version_heading }}"
+            echo "final_prerelease=${{ steps.normalized_release.outputs.final_prerelease }}"
+          } >> "$GITHUB_ENV"
 
       - name: Create tag if it does not exist
         working-directory: .
