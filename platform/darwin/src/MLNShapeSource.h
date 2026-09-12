@@ -133,7 +133,8 @@ FOUNDATION_EXTERN MLN_EXPORT const MLNShapeSourceOption MLNShapeSourceOptionMaxi
  artifacts near tile edges and slower performance. The default value is 128.
 
  This option corresponds to the
- <a href="https://mapvina.io/github/mapvina-style-spec/#sources-geojson-buffer"><code>buffer</code></a>
+ <a
+ href="https://mapvina.io/github/mapvina-style-spec/#sources-geojson-buffer"><code>buffer</code></a>
  source property in the MapVina Style Spec.
  */
 FOUNDATION_EXTERN MLN_EXPORT const MLNShapeSourceOption MLNShapeSourceOptionBuffer;

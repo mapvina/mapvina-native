@@ -3,7 +3,11 @@
 
 namespace MyLibrary {
 
-enum Color { red, green, blue };
+enum Color {
+    red,
+    green,
+    blue
+};
 
 /**
  * @brief Example class to demonstrate the features of the custom CSS.
@@ -27,10 +31,12 @@ public:
      * ## Tables
      *
      * The table content is scrollable if the table gets too wide.
-     * 
-     * | first_column | second_column | third_column | fourth_column | fifth_column | sixth_column | seventh_column | eighth_column | ninth_column |
+     *
+     * | first_column | second_column | third_column | fourth_column | fifth_column | sixth_column | seventh_column |
+     * eighth_column | ninth_column |
      * |--------------|---------------|--------------|---------------|--------------|--------------|----------------|---------------|--------------|
-     * | 1            | 2             | 3            | 4             | 5            | 6            | 7              | 8             | 9            |
+     * | 1            | 2             | 3            | 4             | 5            | 6            | 7              | 8
+     * | 9            |
      *
      * A table can contain images:
      *
@@ -38,8 +44,9 @@ public:
      * |---------------------------|-------------------------------------------------|
      * | ![doxygen](testimage.png) | ← the image should not be inverted in dark-mode |
      *
-     * Complex [Doxygen tables](https://www.doxygen.nl/manual/tables.html) are also supported as seen in @ref multi_row "this example":
-     * 
+     * Complex [Doxygen tables](https://www.doxygen.nl/manual/tables.html) are also supported as seen in @ref multi_row
+     * "this example":
+     *
      * <table>
      * <caption id="multi_row">Complex table</caption>
      * <tr><th>Column 1                      <th>Column 2        <th>Column 3
@@ -75,10 +82,10 @@ public:
      *
      * ## Quotes
      *
-     * > Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-     * > ut labore et dolore magna aliqua. Vitae proin sagittis nisl rhoncus mattis rhoncus urna neque viverra. 
-     * > Velit sed ullamcorper morbi tincidunt ornare. 
-     * > 
+     * > Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+     * > ut labore et dolore magna aliqua. Vitae proin sagittis nisl rhoncus mattis rhoncus urna neque viverra.
+     * > Velit sed ullamcorper morbi tincidunt ornare.
+     * >
      * > Lorem ipsum dolor sit amet consectetur adipiscing elit duis.
      * *- jothepro*
      *
@@ -94,14 +101,16 @@ public:
      *    auto example = std::make_shared<Example>(5);
      *    example->test("test");
      * }
-     * 
+     *
      * @endcode
      *
      *     // code within indented code block
      *     auto test = std::shared_ptr<Example(5);
      *
      *
-     * Inline `code` elements in a text. *Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.* This also works within multiline text and does not break the `layout`.
+     * Inline `code` elements in a text. *Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+     * incididunt ut labore et dolore magna aliqua.* This also works within multiline text and does not break the
+     * `layout`.
      *
      *
      * ## Special hints
@@ -131,9 +140,6 @@ public:
     virtual int virtualfunc() = 0;
 
     static bool staticfunc();
-
-
 };
 
-}
-
+} // namespace MyLibrary

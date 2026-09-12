@@ -1163,8 +1163,8 @@ CLLocationCoordinate2D randomWorldCoordinate(void) {
 // Earthquake Heatmap
 
 - (void)addEarthquakeHeatmap {
-  NSURL *earthquakesURL =
-      [NSURL URLWithString:@"https://mapvina.io/github/mapvina-gl-js/docs/assets/earthquakes.geojson"];
+  NSURL *earthquakesURL = [NSURL
+      URLWithString:@"https://mapvina.io/github/mapvina-gl-js/docs/assets/earthquakes.geojson"];
   MLNShapeSource *source = [[MLNShapeSource alloc] initWithIdentifier:@"earthquakes"
                                                                   URL:earthquakesURL
                                                               options:nil];
@@ -1762,8 +1762,9 @@ CLLocationCoordinate2D randomWorldCoordinate(void) {
 - (NSURL *)radarImageURL:(int)index {
   return [NSURL
       URLWithString:
-          [NSString stringWithFormat:@"https://mapvina.io/github/mapvina-gl-js/docs/assets/radar%d.gif",
-                                     index]];
+          [NSString
+              stringWithFormat:@"https://mapvina.io/github/mapvina-gl-js/docs/assets/radar%d.gif",
+                               index]];
 }
 
 - (void)styleImageSource {
@@ -2526,7 +2527,9 @@ CLLocationCoordinate2D randomWorldCoordinate(void) {
   self.styleURLs = [NSMutableArray array];
 
   [self.styleNames addObject:@"MapVina Streets"];
-  [self.styleURLs addObject:[NSURL URLWithString:@"https://maps.mapvina.com/styles/v2/streets.json?key=public_key"]];
+  [self.styleURLs
+      addObject:
+          [NSURL URLWithString:@"https://maps.mapvina.com/styles/v2/streets.json?key=public_key"]];
 
   /// Style that does not require an `apiKey` nor any further configuration
   [self.styleNames addObject:@"OpenFreeMap Liberty"];

@@ -215,8 +215,7 @@ TileServerOptions TileServerOptions::DefaultConfiguration() {
 }
 
 TileServerOptions TileServerOptions::MapVinaConfiguration() {
-    std::vector<mbgl::util::DefaultStyle> styles{
-        mbgl::util::DefaultStyle("mapvina://maps/streets", "Streets", 2)};
+    std::vector<mbgl::util::DefaultStyle> styles{mbgl::util::DefaultStyle("mapvina://maps/streets", "Streets", 2)};
 
     TileServerOptions options = TileServerOptions()
                                     .withBaseURL("https://maps.mapvina.com")

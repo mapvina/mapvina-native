@@ -24,7 +24,7 @@ public:
     static jni::Local<jni::Object<TileServerOptions>> MapTilerConfiguration(jni::JNIEnv&,
                                                                             const jni::Class<TileServerOptions>&);
     static jni::Local<jni::Object<TileServerOptions>> MapVinaConfiguration(jni::JNIEnv&,
-                                                                            const jni::Class<TileServerOptions>&);
+                                                                           const jni::Class<TileServerOptions>&);
 
     static mbgl::TileServerOptions getTileServerOptions(jni::JNIEnv&, const jni::Object<TileServerOptions>&);
 
