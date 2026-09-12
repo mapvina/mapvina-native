@@ -18,10 +18,12 @@ val androidComponents = extensions.getByType<LibraryAndroidComponentsExtension>(
 val androidLibrary = extensions.getByType<LibraryExtension>()
 
 androidLibrary.publishing {
-    singleVariant("vulkanRelease")
-    singleVariant("vulkanDebug")
-    singleVariant("openglRelease")
-    singleVariant("openglDebug")
+    listOf("vulkanRelease", "vulkanDebug", "openglRelease", "openglDebug").forEach { variant ->
+        singleVariant(variant) {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 afterEvaluate {
@@ -112,8 +114,8 @@ fun configureMavenPublication(
                 if (component != null) {
                     from(component)
                 } else {
-                    project.logger.warn(
-                        "Skipping publication '$publicationName' because component '$componentName' was not found. " +
+                    throw GradleException(
+                        "Cannot publish '$publicationName' because component '$componentName' was not found. " +
                             "Available components: ${components.map { it.name }.sorted()}"
                     )
                 }

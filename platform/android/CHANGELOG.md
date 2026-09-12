@@ -13,6 +13,8 @@
 - Preserve the public `mapvina_logo_icon` resource while correcting the interactive map logo aspect ratio.
 - Correct compact snapshot measurement so narrow snapshots select the new icon instead of dropping the logo.
 - Remove duplicate Finder conflict copies of the legacy Android map logo assets.
+- Use GeoJSON, Turf, and gestures `1.0.1` with the migrated `io.github.mapvina` package names.
+- Attach variant-specific source and Javadoc archives to every Maven publication and reject missing Android components.
 
 ## 1.0.1
 

@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory=$false)][switch]${With-ICU}
 )
 
+$ErrorActionPreference = 'Stop'
 Set-Location (Split-Path $MyInvocation.MyCommand.Path -Parent)
 
 $vcpkg_temp_dir = '***'
@@ -30,10 +31,19 @@ switch($Renderer)
 
 if(-not (Test-Path ('{0}\vcpkg.exe' -f $vcpkg_temp_dir)))
 {
-    & ('{0}\bootstrap-vcpkg.bat' -f $vcpkg_temp_dir)
+    $metadata = ConvertFrom-StringData (Get-Content ('{0}\scripts\vcpkg-tool-metadata.txt' -f $vcpkg_temp_dir) -Raw)
+    $tool_name = if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { 'vcpkg-arm64.exe' } else { 'vcpkg.exe' }
+    $download_url = 'https://github.com/microsoft/vcpkg-tool/releases/download/{0}/{1}' -f $metadata.VCPKG_TOOL_RELEASE_TAG, $tool_name
+    try {
+        Invoke-WebRequest -UseBasicParsing -Uri $download_url -OutFile ('{0}\vcpkg.exe' -f $vcpkg_temp_dir)
+    } catch {
+        subst $vcpkg_temp_dir /D
+        throw
+    }
 }
 
-& ('{0}\vcpkg.exe' -f $vcpkg_temp_dir) $(
+try {
+    & ('{0}\vcpkg.exe' -f $vcpkg_temp_dir) $(
     @(
         '--disable-metrics',
         ('--overlay-triplets={0}' -f [System.IO.Path]::Combine($PWD.Path, 'vendor', 'vcpkg-custom-triplets')),
@@ -41,6 +51,10 @@ if(-not (Test-Path ('{0}\vcpkg.exe' -f $vcpkg_temp_dir)))
         '--clean-after-build',
         'install', 'curl', 'dlfcn-win32', 'glfw3', 'libuv', 'libjpeg-turbo', 'libpng', 'libwebp'
     ) + $renderer_packages + $(if(${With-ICU}) {@('icu')} else {@()})
-)
-
-subst $vcpkg_temp_dir /D
+    )
+    if ($LASTEXITCODE -ne 0) {
+        throw "vcpkg install failed with exit code $LASTEXITCODE"
+    }
+} finally {
+    subst $vcpkg_temp_dir /D
+}

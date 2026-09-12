@@ -9,6 +9,7 @@ MapVina welcomes participation and contributions from everyone. Please read [`Ma
 - Correct the MapVina logo accessibility label and retain compatibility aliases for the previous asset names.
 - Fix dynamic XCFramework linking against the Xcode 26 simulator SDK by resolving unavailable Metal constants dynamically.
 - Gate GitHub release publication on successful CocoaPods and Swift Package distribution releases.
+- Run iOS verification on GitHub-hosted macOS runners and only package Device Farm uploads when AWS integration is configured.
 
 ## 6.26.0
 
