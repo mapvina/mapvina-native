@@ -218,6 +218,22 @@ jobs:
       - android-build-and-upload-release
       - android-publish-maven
     steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
+
+      - name: Verify public Maven artifacts before finalizing
+        timeout-minutes: 100
+        env:
+          SIGNING_PRIVATE_KEY: ${{ secrets.SIGNING_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          GNUPGHOME="$(mktemp -d)"
+          export GNUPGHOME
+          chmod 700 "$GNUPGHOME"
+          trap 'gpgconf --kill all; rm -rf "$GNUPGHOME"' EXIT
+          printf '%s' "$SIGNING_PRIVATE_KEY" | gpg --batch --import
+          python3 .github/scripts/verify-android-publication.py \
+            "$(cat platform/android/VERSION)" --gpg-home "$GNUPGHOME"
+
       - name: Publish release (remove draft)
         uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2.6.1
         with:

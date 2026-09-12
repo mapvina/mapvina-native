@@ -15,6 +15,7 @@
 - Remove duplicate Finder conflict copies of the legacy Android map logo assets.
 - Use GeoJSON, Turf, and gestures `1.0.1` with the migrated `io.github.mapvina` package names.
 - Attach variant-specific source and Javadoc archives to every Maven publication and reject missing Android components.
+- Verify public Maven checksums, signatures, dependencies, native ABIs, and transparent logo resources before making the GitHub release public.
 
 ## 1.0.1
 
