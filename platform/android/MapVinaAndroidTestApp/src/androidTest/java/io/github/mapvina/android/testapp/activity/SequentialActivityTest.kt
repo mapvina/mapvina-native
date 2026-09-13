@@ -23,7 +23,6 @@ class SequentialActivityTest(private val activity: Class<out Activity>) {
             io.github.mapvina.android.testapp.activity.telemetry.PerformanceMeasurementActivity::class.java,
             io.github.mapvina.android.testapp.activity.stability.LongRunningActivity::class.java,
             io.github.mapvina.android.testapp.activity.stability.UserMapActivity::class.java,
-            io.github.mapvina.android.testapp.activity.stability.NavigationMapActivity::class.java,
 
             // need style updates
             io.github.mapvina.android.testapp.activity.turf.MapSnapshotterWithinExpression::class.java,

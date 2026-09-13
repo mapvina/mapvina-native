@@ -33,7 +33,6 @@ kotlinxCoroutinesAndroid = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-
 mapvinaJavaGeoJSON = { group = "io.github.mapvina", name = "android-sdk-geojson", version.ref = "mapVinaServices" }
 mapvinaGestures = { group = "io.github.mapvina", name = "mapvina-android-gestures", version = "1.0.1" }
 mapvinaJavaTurf = { group = "io.github.mapvina", name = "android-sdk-turf", version.ref = "mapVinaServices" }
-mapvinaNavigation = { group = "io.github.mapvina.navigation", name = "navigation-ui-android", version = "1.0.0" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockito = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }

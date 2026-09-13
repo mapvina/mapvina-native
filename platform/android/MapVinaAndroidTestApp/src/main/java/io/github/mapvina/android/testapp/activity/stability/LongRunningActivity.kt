@@ -56,17 +56,17 @@ class LongRunningActivity : AppCompatActivity() {
             val displays = displayManager.displays
 
             if (displays.size > 1) {
-                // remove navigation map from layout
+                // remove the secondary map from the primary display
                 supportFragmentManager
                     .beginTransaction()
-                    .remove(supportFragmentManager.findFragmentById(R.id.navigation_map)!!)
+                    .remove(supportFragmentManager.findFragmentById(R.id.secondary_map)!!)
                     .commit()
 
-                // and move it to it's own activity
+                // and move it to its own activity
                 val activityOptions = ActivityOptions.makeBasic()
                 activityOptions.launchDisplayId = displays[1].displayId
 
-                startActivity(Intent(this, NavigationMapActivity::class.java), activityOptions.toBundle())
+                startActivity(Intent(this, UserMapActivity::class.java), activityOptions.toBundle())
             }
         }
 

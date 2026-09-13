@@ -144,15 +144,6 @@ kotlin {
 dependencies {
     implementation(project(":MapVinaAndroid"))
 
-    implementation(libs.mapvinaNavigation) {
-        exclude(group = "io.github.mapvina", module = "android-sdk")
-        exclude(group = "io.github.mapvina", module = "android-sdk-opengl")
-    }
-    implementation("io.github.mapvina.navigation:navigation-core-android:1.0.0")
-    implementation("io.github.mapvina.spatialk:geojson-jvm:1.0.0")
-    implementation("io.github.mapvina.spatialk:turf-jvm:1.0.0")
-    implementation("io.github.mapvina.spatialk:polyline-encoding-jvm:1.0.0")
-
     implementation(libs.mapvinaJavaTurf)
 
     implementation(libs.supportRecyclerView)
