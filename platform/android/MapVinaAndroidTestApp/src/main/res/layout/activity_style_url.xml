@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -30,6 +31,18 @@
     <io.github.mapvina.android.maps.MapView
         android:id="@id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:mapvina_uiAttribution="true"
+        app:mapvina_uiAttributionGravity="bottom|end"
+        app:mapvina_uiAttributionMarginLeft="16dp"
+        app:mapvina_uiAttributionMarginTop="16dp"
+        app:mapvina_uiAttributionMarginRight="16dp"
+        app:mapvina_uiAttributionMarginBottom="16dp"
+        app:mapvina_uiLogo="true"
+        app:mapvina_uiLogoGravity="bottom|start"
+        app:mapvina_uiLogoMarginLeft="16dp"
+        app:mapvina_uiLogoMarginTop="16dp"
+        app:mapvina_uiLogoMarginRight="16dp"
+        app:mapvina_uiLogoMarginBottom="16dp" />
 
 </LinearLayout>

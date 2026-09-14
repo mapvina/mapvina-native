@@ -44,7 +44,7 @@
 "LOAD_STYLE_FAILED_DESC" = "형식이 로드되지 않아, 맵 로드에 실패하였습니다.";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "맵박스";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "지도";

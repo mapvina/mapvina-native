@@ -32,7 +32,7 @@
 "INFO_A11Y_LABEL" = "この地図について";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "地図";

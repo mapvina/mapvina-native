@@ -2,6 +2,16 @@
 
 MapVina welcomes participation and contributions from everyone. Please read [`MapVina iOS Developer Guide`](https://mapvina.io/github/mapvina-native/docs/book/ios/index.html) to get started.
 
+## 1.0.1
+
+- Replace legacy map and snapshot logos with the MapVina Brand Kit v1.0 horizontal logo and compact icon.
+- Keep the MapVina logo canvas transparent so the underlying map remains visible across map styles.
+- Correct the MapVina logo accessibility label and retain compatibility aliases for the previous asset names.
+- Fix dynamic XCFramework linking against the Xcode 26 simulator SDK by resolving unavailable Metal constants dynamically.
+- Gate GitHub release publication on successful CocoaPods and Swift Package distribution releases.
+- Run iOS verification on GitHub-hosted macOS runners and only package Device Farm uploads when AWS integration is configured.
+- Accept the legacy CocoaPods secret during the `1.0.1` transition while standardizing new releases on `COCOAPODS_TRUNK_TOKEN`.
+
 ## 6.26.0
 
 Note: this release has some changes to how icon offsets behave on pitched maps. If this causes a regression for your use case please open an issue on `mapvina/mapvina-native`.

@@ -231,7 +231,8 @@ public class MapView extends FrameLayout implements NativeMapView.ViewCallback {
     logoView.setTag("logoView");
     logoView.getLayoutParams().width = LayoutParams.WRAP_CONTENT;
     logoView.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
-    logoView.setImageDrawable(BitmapUtils.getDrawableFromRes(getContext(), R.drawable.mapvina_logo_helmet));
+    logoView.setAdjustViewBounds(true);
+    logoView.setImageDrawable(BitmapUtils.getDrawableFromRes(getContext(), R.drawable.mapvina_logo_icon));
     return logoView;
   }
 

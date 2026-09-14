@@ -41,7 +41,7 @@
 "LOAD_STYLE_FAILED_DESC" = "載入樣式表時發生錯誤，無法載入地圖。";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "地圖";

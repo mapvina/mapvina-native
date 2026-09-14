@@ -18,10 +18,12 @@ val androidComponents = extensions.getByType<LibraryAndroidComponentsExtension>(
 val androidLibrary = extensions.getByType<LibraryExtension>()
 
 androidLibrary.publishing {
-    singleVariant("vulkanRelease")
-    singleVariant("vulkanDebug")
-    singleVariant("openglRelease")
-    singleVariant("openglDebug")
+    listOf("vulkanRelease", "vulkanDebug", "openglRelease", "openglDebug").forEach { variant ->
+        singleVariant(variant) {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 afterEvaluate {
@@ -30,7 +32,10 @@ afterEvaluate {
         signAllPublications()
     }
     
-    val privateKeyFile = file("/Volumes/DATA/MapVina/private-key.asc")
+    val signingKeyPath = (project.findProperty("signing.secretKeyFile") as String?)
+        ?: System.getenv("SIGNING_SECRET_KEY_FILE")
+        ?: "${System.getProperty("user.home")}/.mapvina-secrets/private-key.asc"
+    val privateKeyFile = file(signingKeyPath)
     if (privateKeyFile.exists()) {
         val privateKey = privateKeyFile.readText()
         val password = project.findProperty("signing.password") as String? ?: System.getenv("SIGNING_PASSWORD")
@@ -109,8 +114,8 @@ fun configureMavenPublication(
                 if (component != null) {
                     from(component)
                 } else {
-                    project.logger.warn(
-                        "Skipping publication '$publicationName' because component '$componentName' was not found. " +
+                    throw GradleException(
+                        "Cannot publish '$publicationName' because component '$componentName' was not found. " +
                             "Available components: ${components.map { it.name }.sorted()}"
                     )
                 }

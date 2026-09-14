@@ -144,10 +144,6 @@ kotlin {
 dependencies {
     implementation(project(":MapVinaAndroid"))
 
-    implementation(libs.mapvinaNavigation) {
-        exclude(group = "io.github.mapvina", module = "android-sdk")
-    }
-
     implementation(libs.mapvinaJavaTurf)
 
     implementation(libs.supportRecyclerView)

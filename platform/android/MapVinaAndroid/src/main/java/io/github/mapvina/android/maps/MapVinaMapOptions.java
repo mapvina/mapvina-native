@@ -58,8 +58,8 @@ public class MapVinaMapOptions implements Parcelable {
   @ColorInt
   private int attributionTintColor = UNDEFINED_COLOR;
   private boolean attributionEnabled = true;
-  private int attributionGravity = Gravity.BOTTOM | Gravity.START;
-  private int[] attributionMargins;
+  private int attributionGravity = Gravity.BOTTOM | Gravity.END;
+  private int[] attributionMargins = new int[]{16, 16, 16, 16};
 
   private double minZoom = MapVinaConstants.MINIMUM_ZOOM;
   private double maxZoom = MapVinaConstants.MAXIMUM_ZOOM;

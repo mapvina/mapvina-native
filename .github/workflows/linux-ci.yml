@@ -75,6 +75,7 @@ jobs:
         uses: github/codeql-action/init@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
         with:
           languages: cpp
+          build-mode: manual
 
       - name: Install dependencies
         run: .github/scripts/install-linux-deps
@@ -111,12 +112,16 @@ jobs:
           cmake --version
 
           # sccache configuration
-          export SCCACHE_BUCKET=mapvina-native-sccache
-          export SCCACHE_REGION=eu-central-1
-
-          if [ -z "${AWS_SECRET_ACCESS_KEY}" ]; then
-            echo "AWS_SECRET_ACCESS_KEY not set; not uploading sccache cache to S3"
-            export SCCACHE_S3_NO_CREDENTIALS=1
+          if [ -n "${AWS_SECRET_ACCESS_KEY:-}" ] && \
+             aws s3api head-bucket \
+               --bucket mapvina-native-sccache \
+               --region eu-central-1 2>/dev/null; then
+            export SCCACHE_BUCKET=mapvina-native-sccache
+            export SCCACHE_REGION=eu-central-1
+          else
+            echo "Remote sccache bucket unavailable; using the runner-local cache"
+            export SCCACHE_DIR="${RUNNER_TEMP}/sccache"
+            export SCCACHE_CACHE_SIZE=2G
           fi
 
           # ctcache configuration

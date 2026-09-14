@@ -1,3 +1,15 @@
 diff.png
 actual.png
 *.db
+!offline_database/corrupt-delayed.db
+!offline_database/corrupt-immediate.db
+!offline_database/no_auto_vacuum.db
+!offline_database/satellite_test.db
+!offline_database/sideload_ambient.db
+!offline_database/sideload_sat.db
+!offline_database/sideload_sat_multiple.db
+!offline_database/v2.db
+!offline_database/v3.db
+!offline_database/v4.db
+!offline_database/v5.db
+!offline_database/v999.db

@@ -213,7 +213,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          $vcpkg_commit_id = ($(git submodule status .\platform\windows\vendor\vcpkg).Trim() -split ' ')[0]
+          $vcpkg_commit_id = (git rev-parse HEAD:platform/windows/vendor/vcpkg).Trim()
           Add-Content -Path $env:GITHUB_ENV -Value "VCPKG_COMMIT_ID=${vcpkg_commit_id}"
 
       - name: Restore vcpkg binary cache

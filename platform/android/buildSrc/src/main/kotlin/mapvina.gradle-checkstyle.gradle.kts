@@ -14,6 +14,7 @@ tasks.register<Checkstyle>("checkstyle") {
     configFile = file("../checkstyle.xml")
     source("src")
     include("**/*.java")
+    exclude("**/jniLibs/**")
     exclude("**/gen/**")
     exclude("**/style/*LayerTest.java")
     exclude("**/style/LightTest.java")

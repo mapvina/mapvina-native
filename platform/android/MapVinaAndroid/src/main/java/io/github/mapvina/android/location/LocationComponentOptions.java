@@ -808,8 +808,9 @@ public class LocationComponentOptions implements Parcelable {
   }
 
   /**
-   * Enable or disable smooth animation of compass values for {@link io.github.mapvina.android.location.modes.CameraMode}
-   * and {@link io.github.mapvina.android.location.modes.RenderMode}.
+   * Enable or disable smooth animation of compass values for
+   * {@link io.github.mapvina.android.location.modes.CameraMode} and
+   * {@link io.github.mapvina.android.location.modes.RenderMode}.
    *
    * @return whether smooth compass animation is enabled
    */
@@ -1879,8 +1880,9 @@ public class LocationComponentOptions implements Parcelable {
     }
 
     /**
-     * Enable or disable smooth animation of compass values for {@link io.github.mapvina.android.location.modes.CameraMode}
-     * and {@link io.github.mapvina.android.location.modes.RenderMode}.
+     * Enable or disable smooth animation of compass values for
+     * {@link io.github.mapvina.android.location.modes.CameraMode} and
+     * {@link io.github.mapvina.android.location.modes.RenderMode}.
      *
      * @return whether smooth compass animation is enabled
      */

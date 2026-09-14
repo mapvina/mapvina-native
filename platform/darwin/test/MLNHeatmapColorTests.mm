@@ -38,8 +38,8 @@
   NSExpression *constantExpression2 =
       [NSExpression expressionWithFormat:@"%@", [MLNColor blueColor]];
 #if TARGET_OS_IPHONE
-  XCTExpectFailure(
-      @"Awaiting unit test refactoring for https://github.io/github/mapvina/mapvina-native/issues/331");
+  XCTExpectFailure(@"Awaiting unit test refactoring for "
+                   @"https://github.io/github/mapvina/mapvina-native/issues/331");
 #endif
   NSExpression *functionExpression =
       [NSExpression expressionWithFormat:@"mgl_step:from:stops:($heatmapDensity, %@, %@)",
@@ -52,8 +52,8 @@
   XCTAssertEqual(rawLayer->getHeatmapColor().evaluate(12.0), mbgl::Color::blue(),
                  @"Setting heatmapColor to an expression depending on $heatmapDensity should "
                  @"update heatmap-color.");
-  XCTExpectFailure(
-      @"Awaiting unit test refactoring for https://github.io/github/mapvina/mapvina-native/issues/331");
+  XCTExpectFailure(@"Awaiting unit test refactoring for "
+                   @"https://github.io/github/mapvina/mapvina-native/issues/331");
   XCTAssertEqualObjects(
       layer.heatmapColor, functionExpression,
       @"heatmapColor should round-trip expressions depending on $heatmapDensity.");

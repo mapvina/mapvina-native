@@ -41,7 +41,7 @@
 "LOAD_STYLE_FAILED_DESC" = "Die Karte konnte nicht geladen werden, da diese Form nicht geladen werden kann";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "Karte";

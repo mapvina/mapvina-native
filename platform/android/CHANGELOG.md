@@ -1,5 +1,28 @@
 # Changelog MapVina Native for Android
 
+## 1.0.2
+
+### ✨ Features and improvements
+
+- Replace legacy map ornaments and snapshot logos with the MapVina Brand Kit v1.0 horizontal logo and compact icon.
+- Keep the MapVina logo canvas transparent so the map remains visible behind the branding across light, dark, and satellite styles.
+- Make the Android release workflow use GitHub-hosted runners and gate the public release on all Maven Central publications.
+
+### 🐞 Bug fixes
+
+- Preserve the public `mapvina_logo_icon` resource while correcting the interactive map logo aspect ratio.
+- Correct compact snapshot measurement so narrow snapshots select the new icon instead of dropping the logo.
+- Remove duplicate Finder conflict copies of the legacy Android map logo assets.
+- Use GeoJSON, Turf, and gestures `1.0.1` with the migrated `io.github.mapvina` package names.
+- Attach variant-specific source and Javadoc archives to every Maven publication and reject missing Android components.
+- Verify public Maven checksums, signatures, dependencies, native ABIs, and transparent logo resources before making the GitHub release public.
+
+## 1.0.1
+
+### 🐞 Bug fixes
+
+- Increase the legacy Android map logo size and publish the `1.0.1` Maven artifacts.
+
 ## 1.0.0
 
 ### ✨ Features and improvements

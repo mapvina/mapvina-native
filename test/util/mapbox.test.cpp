@@ -305,12 +305,15 @@ TEST(Mapbox, CanonicalizeVectorTileset) {
 
 // MapVina tests
 TEST(MapVina, CanonicalURL) {
-    EXPECT_EQ(
-        "https://maps.mapvina.com/styles/v2/streets.json?key=public_key",
-        mbgl::util::mapbox::normalizeStyleURL(mapboxFixture::mapVinaTileServerOptions, "mapvina://maps/style", ""));
-    EXPECT_EQ(
-        "https://maps.mapvina.com/tiles/v2/composite.json?key=public_key",
-        mbgl::util::mapbox::normalizeSourceURL(mapboxFixture::mapVinaTileServerOptions, "mapvina://tiles/tiles", ""));
+    EXPECT_EQ("https://maps.mapvina.com/styles/v2/streets.json?key=test_key",
+              mbgl::util::mapbox::normalizeStyleURL(
+                  mapboxFixture::mapVinaTileServerOptions, "mapvina://maps/streets", "test_key"));
+    EXPECT_EQ("https://maps.mapvina.com/tiles/v2/composite.json?key=test_key",
+              mbgl::util::mapbox::normalizeSourceURL(
+                  mapboxFixture::mapVinaTileServerOptions, "mapvina://tiles/tiles", "test_key"));
+    EXPECT_THROW(
+        mbgl::util::mapbox::normalizeSourceURL(mapboxFixture::mapVinaTileServerOptions, "mapvina://tiles/tiles", ""),
+        std::runtime_error);
     EXPECT_EQ("https://maps.mapvina.com/font/{fontstack}/{start}-{end}.pbf",
               mbgl::util::mapbox::normalizeGlyphsURL(
                   mapboxFixture::mapVinaTileServerOptions, "mapvina://fonts/{fontstack}/{start}-{end}.pbf", ""));

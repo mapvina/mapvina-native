@@ -31,9 +31,13 @@ mkdir -p "$build_dir"/headers
 
 bazel build --//:renderer=metal //platform/darwin:generated_style_public_hdrs
 
-# download resources from S3
+# download resources from S3 when the public bucket is available
 
-aws s3 sync --no-sign-request "s3://mapvina-native/ios-documentation-resources" "platform/ios/MapVina.docc/Resources"
+if aws s3api head-bucket --no-sign-request --bucket mapvina-native 2>/dev/null; then
+  aws s3 sync --no-sign-request "s3://mapvina-native/ios-documentation-resources" "platform/ios/MapVina.docc/Resources"
+else
+  echo "DocC resources bucket is unavailable; continuing with checked-in resources."
+fi
 
 public_headers=$(bazel query 'kind("source file", deps(//platform:ios-sdk, 2))' --output location | grep ".h$" | sed -r 's#.*/([^:]+).*#\1#')
 style_headers=$(bazel cquery --//:renderer=metal //platform/darwin:generated_style_public_hdrs --output=files)

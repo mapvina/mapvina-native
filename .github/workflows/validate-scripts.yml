@@ -24,3 +24,6 @@ jobs:
 
       - name: Run tests
         run: node --test .github/scripts/**.test.ts
+
+      - name: Test Android publication verification
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'

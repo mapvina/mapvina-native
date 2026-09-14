@@ -220,7 +220,8 @@
 
 - (void)testLayers {
   NSArray<MLNStyleLayer *> *initialLayers = self.style.layers;
-  if ([initialLayers.firstObject.identifier isEqualToString:@"io.github.mapvina.annotations.points"]) {
+  if ([initialLayers.firstObject.identifier
+          isEqualToString:@"io.github.mapvina.annotations.points"]) {
     XCTAssertEqual(self.style.layers.count, 1UL);
   } else {
     XCTAssertEqual(self.style.layers.count, 0UL);

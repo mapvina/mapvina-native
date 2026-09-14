@@ -44,7 +44,7 @@
 "LOAD_STYLE_FAILED_DESC" = "No se pudo cargar el mapa debido a un error de carga en el estilo.";
 
 /* Accessibility label */
-"LOGO_A11Y_LABEL" = "Mapbox";
+"LOGO_A11Y_LABEL" = "MapVina";
 
 /* Accessibility label */
 "MAP_A11Y_LABEL" = "Mapa";

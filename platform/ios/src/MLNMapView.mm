@@ -775,12 +775,12 @@ public:
 
   // setup logo
   //
-  UIImage *logoRaw = [UIImage mgl_resourceImageNamed:@"mapvina-logo-stroke-gray"];
+  UIImage *logoRaw = [UIImage mgl_resourceImageNamed:@"mapvina-logo-horizontal-primary"];
   UIImage *logo = [logoRaw imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
   _logoView = [[UIImageView alloc] initWithImage:logo];
   _logoView.accessibilityTraits = UIAccessibilityTraitStaticText;
   _logoView.accessibilityLabel = NSLocalizedStringWithDefaultValue(
-      @"LOGO_A11Y_LABEL", nil, nil, @"Mapbox", @"Accessibility label");
+      @"LOGO_A11Y_LABEL", nil, nil, @"MapVina", @"Accessibility label");
   _logoView.translatesAutoresizingMaskIntoConstraints = NO;
   [self addSubview:_logoView];
   _logoView.hidden = !_showsLogoView;

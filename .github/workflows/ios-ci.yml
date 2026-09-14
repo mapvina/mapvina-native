@@ -43,7 +43,8 @@ jobs:
   ios-build:
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: macos-15
+    timeout-minutes: 360
     concurrency:
       # cancel jobs on PRs only
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -79,7 +80,7 @@ jobs:
           path: ~/.cache/bazel
 
       - name: Build Example (Swift) App
-        run: bazel build //platform/ios/app-swift:MapVinaApp --//:renderer=metal
+        run: bazel build //platform/ios/app-swift:MapVinaApp --//:renderer=metal --ios_multi_cpus=sim_arm64
 
       - name: Check debug symbols
         run: bazel run //platform:check-public-symbols --//:renderer=metal
@@ -119,6 +120,7 @@ jobs:
       # render test
 
       - name: Build RenderTest .ipa and .xctest for AWS Device Farm
+        if: vars.OIDC_AWS_ROLE_TO_ASSUME
         run: |
           set -e
           bazel run //platform/ios:xcodeproj --@rules_xcodeproj//xcodeproj:extra_common_flags="--//:renderer=metal"
@@ -135,6 +137,7 @@ jobs:
           echo render_test_artifacts_dir="$render_test_app_dir" >> "$GITHUB_ENV"
 
       - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        if: vars.OIDC_AWS_ROLE_TO_ASSUME
         with:
           name: ios-render-test
           retention-days: 3
@@ -146,6 +149,7 @@ jobs:
       # C++ unit tests
 
       - name: Build CppUnitTests .ipa and .xctest for AWS Device Farm
+        if: vars.OIDC_AWS_ROLE_TO_ASSUME
         run: |
           set -e
           bazel run //platform/ios:xcodeproj --@rules_xcodeproj//xcodeproj:extra_common_flags="--//:renderer=metal"
@@ -162,6 +166,7 @@ jobs:
           echo ios_cpp_test_artifacts_dir="$ios_cpp_test_app_dir" >> "$GITHUB_ENV"
 
       - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        if: vars.OIDC_AWS_ROLE_TO_ASSUME
         with:
           name: ios-cpp-unit-tests
           retention-days: 3
