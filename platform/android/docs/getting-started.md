@@ -15,7 +15,7 @@ To follow this example from scratch, in Android Studio create a new "Empty Views
 
    A newly-created app will likely already have `mavenCentral()` in a top-level `settings.gradle` file, and you won't need to add it.
 
-2. Add the library as a dependency into your module Gradle file (usually `<project>/<app-module>/build.gradle`). Replace `<version>` with the [latest MapVina Android version](https://github.io/github/mapvina/mapvina-native/releases?q=android-v11&expanded=true) (e.g.: `io.github.mapvina:android-sdk:11.8.0`):
+2. Add the library as a dependency into your module Gradle file (usually `<project>/<app-module>/build.gradle`). Replace `<version>` with the [latest MapVina Android version](https://github.com/mapvina/mapvina-native/releases?q=android-v&expanded=true) (e.g.: `io.github.mapvina:android-sdk:1.0.2`):
 
     ```gradle
     dependencies {

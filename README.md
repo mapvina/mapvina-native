@@ -24,7 +24,7 @@ Add [the latest version](https://central.sonatype.com/artifact/io.github.mapvina
 ```gradle
     dependencies {
         ...
-        implementation 'io.github.mapvina:android-sdk:11.11.0'
+        implementation 'io.github.mapvina:android-sdk:1.0.2'
         ...
     }
 ```
