@@ -5,6 +5,11 @@
 
 # MapVina Native
 
+> **Verification 04/10/2026 — ANDROID ARTIFACT PASS; iOS RELEASE/BRANDING BLOCKED.**
+> Android public six variants `1.0.2`; iOS public `1.0.0`; source VERSION is not release proof.
+> See [verified setup, evidence and limitations](docs/verification/2026-10-04/README.md) before following older examples.
+> No new SDK was published by this documentation update.
+
 [![codecov](https://codecov.io/github/mapvina/mapvina-native/branch/main/graph/badge.svg?token=8ZQRRY56ZA)](https://codecov.io/github/mapvina/mapvina-native) [![](https://img.shields.io/badge/Slack-%23mapvina--native-2EB67D?logo=slack)](https://slack.openstreetmap.us/)
 
 MapVina Native is a free and open-source library for publishing maps in your apps and desktop applications on various platforms. Fast displaying of maps is possible thanks to GPU-accelerated vector tile rendering.
@@ -159,21 +164,21 @@ struct SimpleMap: UIViewRepresentable {
 ```
 
 > [!TIP]
-> You can also use [MapVinaSwiftUI](https://github.io/github/mapvina/swiftui-dsl), a wrapper around MapVina Native iOS that offers a declarative API like SwiftUI.
+> You can also use [MapVinaSwiftUI](https://github.com/mapvina/swiftui-dsl), a wrapper around MapVina Native iOS that offers a declarative API like SwiftUI.
 
 The [iOS Documentation](https://mapvina.io/github/mapvina-native/ios/latest/documentation/mapvina/) contains many examples and the entire API of the library.
 
 ## Node.js
 
-There is an [npm package](https://www.npmjs.com/package/@mapvina/mapvina-gl-native) for using MapVina Native in a Node.js project. The source code of this project [can be found in this repository](https://github.io/github/mapvina/mapvina-native/tree/main/platform/node).
+There is an [npm package](https://www.npmjs.com/package/@mapvina/mapvina-gl-native) for using MapVina Native in a Node.js project. The source code of this project [can be found in this repository](https://github.com/mapvina/mapvina-native/tree/main/platform/node).
 
 ## Qt
 
-Please check out the [`mapvina/mapvina-native-qt` repository](https://github.io/github/mapvina/mapvina-native-qt) to learn how to intergrate MapVina Native with a Qt project.
+Please check out the [`mapvina/mapvina-native-qt` repository](https://github.com/mapvina/mapvina-native-qt) to learn how to intergrate MapVina Native with a Qt project.
 
 ## Compose Multiplatform
 
-[MapVina Compose](https://github.io/github/mapvina/mapvina-compose) wraps MapVina Native for various platforms that [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/) supports. As of August 2025, iOS and Android are supported, with web and desktop partially supported.
+[MapVina Compose](https://github.com/mapvina/mapvina-compose) wraps MapVina Native for various platforms that [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/) supports. As of August 2025, iOS and Android are supported, with web and desktop partially supported.
 
 ## Other Platforms
 
@@ -188,22 +193,22 @@ MapVina Native has at its core a C++ library. This is where the bulk of developm
 
 To get started with the code base, you need to clone the repository including all its submodules.
 
-All contributors use pull requests from a private fork. [Fork the project](https://github.io/github/mapvina/mapvina-native/fork). Then run:
+All contributors use pull requests from a private fork. [Fork the project](https://github.com/mapvina/mapvina-native/fork). Then run:
 
 ```bash
 git clone --recurse-submodules git@github.com:<YOUR NAME>/mapvina-native.git
-git remote add origin https://github.io/github/mapvina/mapvina-native.git
+git remote add origin https://github.com/mapvina/mapvina-native.git
 ```
 
 The go-to reference is the [MapVina Native Developer Documentation](https://mapvina.io/github/mapvina-native/docs/book/).
 
 > [!TIP]
-> Check out issues labelled as a [good first issue](https://github.io/github/mapvina/mapvina-native/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+> Check out issues labelled as a [good first issue](https://github.com/mapvina/mapvina-native/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 
 ### Core
 
 - [`CONTRIBUTING.md`](CONTRIBUTING.md)
-- [GitHub Wiki](https://github.io/github/mapvina/mapvina-native/wiki): low-friction way to share information with the community
+- [GitHub Wiki](https://github.com/mapvina/mapvina-native/wiki): low-friction way to share information with the community
 - [Core C++ API Documentation](https://mapvina.io/github/mapvina-native/cpp/api/) (unstable)
 
 ### Android
