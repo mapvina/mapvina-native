@@ -1,0 +1,184 @@
+{
+  "date": "2026-10-04",
+  "maven": [
+    {
+      "artifact": "android-plugin-annotation-v9",
+      "version": "1.0.0",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-plugin-annotation-v9/maven-metadata.xml",
+      "pom": true
+    },
+    {
+      "artifact": "android-plugin-building-v9",
+      "version": "1.0.0",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-plugin-building-v9/maven-metadata.xml",
+      "pom": true
+    },
+    {
+      "artifact": "android-plugin-localization-v9",
+      "version": "1.0.0",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-plugin-localization-v9/maven-metadata.xml",
+      "pom": true
+    },
+    {
+      "artifact": "android-plugin-markerview-v9",
+      "version": "1.0.0",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-plugin-markerview-v9/maven-metadata.xml",
+      "pom": true
+    },
+    {
+      "artifact": "android-plugin-offline-v9",
+      "version": "1.0.0",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-plugin-offline-v9/maven-metadata.xml",
+      "pom": true
+    },
+    {
+      "artifact": "android-plugin-scalebar-v9",
+      "version": "1.0.0",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-plugin-scalebar-v9/maven-metadata.xml",
+      "pom": true
+    },
+    {
+      "artifact": "android-sdk",
+      "version": "1.0.2",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-sdk/maven-metadata.xml",
+      "pom": true,
+      "aar_sha256": "c5910d139d294d1a2e0b7017c89acc9cd394773c306e65794a87ecb23546b97b",
+      "checksum_sha1_matches": true,
+      "aar_signature_present": true,
+      "pom_signature_present": true,
+      "logo_sha256": "5a9edbd0d555f788475950eac2bd6b2fcfab396f242b734984c7fd96537dd9ac",
+      "pom_sha1_matches": true
+    },
+    {
+      "artifact": "android-sdk-debug",
+      "version": "1.0.2",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-sdk-debug/maven-metadata.xml",
+      "pom": true,
+      "aar_sha256": "ec531981c87fdcd7af3fd1e748be7c2e272d202c8dc8802775687d4c10127233",
+      "checksum_sha1_matches": true,
+      "aar_signature_present": true,
+      "pom_signature_present": true,
+      "logo_sha256": "5a9edbd0d555f788475950eac2bd6b2fcfab396f242b734984c7fd96537dd9ac",
+      "pom_sha1_matches": true
+    },
+    {
+      "artifact": "android-sdk-geojson",
+      "version": "1.0.1",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-sdk-geojson/maven-metadata.xml",
+      "pom": true,
+      "namespace_examples": [
+        "io/github/mapvina/geojson/LineString.class",
+        "io/github/mapvina/geojson/GeometryCollection.class",
+        "io/github/mapvina/geojson/Feature$GsonTypeAdapter.class"
+      ]
+    },
+    {
+      "artifact": "android-sdk-ktx-v7",
+      "version": "1.0.0",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-sdk-ktx-v7/maven-metadata.xml",
+      "pom": true
+    },
+    {
+      "artifact": "android-sdk-opengl",
+      "version": "1.0.2",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-sdk-opengl/maven-metadata.xml",
+      "pom": true,
+      "aar_sha256": "8b510762b9c60e8ca0e9663002e6e86a07d09b6b7ba9460181c37ebff18b5718",
+      "checksum_sha1_matches": true,
+      "aar_signature_present": true,
+      "pom_signature_present": true,
+      "logo_sha256": "5a9edbd0d555f788475950eac2bd6b2fcfab396f242b734984c7fd96537dd9ac",
+      "pom_sha1_matches": true
+    },
+    {
+      "artifact": "android-sdk-opengl-debug",
+      "version": "1.0.2",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-sdk-opengl-debug/maven-metadata.xml",
+      "pom": true,
+      "aar_sha256": "d7c6b9710e0851991ccfc3976507a36e55b305f63bdf3fad79d3defa31ff0556",
+      "checksum_sha1_matches": true,
+      "aar_signature_present": true,
+      "pom_signature_present": true,
+      "logo_sha256": "5a9edbd0d555f788475950eac2bd6b2fcfab396f242b734984c7fd96537dd9ac",
+      "pom_sha1_matches": true
+    },
+    {
+      "artifact": "android-sdk-turf",
+      "version": "1.0.1",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-sdk-turf/maven-metadata.xml",
+      "pom": true,
+      "namespace_examples": [
+        "io/github/mapvina/turf/TurfException.class",
+        "io/github/mapvina/turf/TurfConstants$TurfUnitCriteria.class",
+        "io/github/mapvina/turf/TurfJoins.class"
+      ]
+    },
+    {
+      "artifact": "android-sdk-vulkan",
+      "version": "1.0.2",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-sdk-vulkan/maven-metadata.xml",
+      "pom": true,
+      "aar_sha256": "c5910d139d294d1a2e0b7017c89acc9cd394773c306e65794a87ecb23546b97b",
+      "checksum_sha1_matches": true,
+      "aar_signature_present": true,
+      "pom_signature_present": true,
+      "logo_sha256": "5a9edbd0d555f788475950eac2bd6b2fcfab396f242b734984c7fd96537dd9ac",
+      "pom_sha1_matches": true
+    },
+    {
+      "artifact": "android-sdk-vulkan-debug",
+      "version": "1.0.2",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/android-sdk-vulkan-debug/maven-metadata.xml",
+      "pom": true,
+      "aar_sha256": "ec531981c87fdcd7af3fd1e748be7c2e272d202c8dc8802775687d4c10127233",
+      "checksum_sha1_matches": true,
+      "aar_signature_present": true,
+      "pom_signature_present": true,
+      "logo_sha256": "5a9edbd0d555f788475950eac2bd6b2fcfab396f242b734984c7fd96537dd9ac",
+      "pom_sha1_matches": true
+    },
+    {
+      "artifact": "earcut4j",
+      "version": "1.0.0",
+      "metadata_url": "https://repo.maven.apache.org/maven2/io/github/mapvina/earcut4j/maven-metadata.xml",
+      "pom": true
+    },
+    {
+      "artifact": "mapvina-android-gestures",
+      "version": "1.0.1",
+      "pom": true,
+      "namespace_examples": [
+        "io/github/mapvina/android/gestures/AndroidGesturesManager$GestureType.class",
+        "io/github/mapvina/android/gestures/AndroidGesturesManager.class",
+        "io/github/mapvina/android/gestures/BaseGesture.class"
+      ]
+    }
+  ],
+  "pub": {
+    "mapvina_gl": {
+      "version": "1.0.1",
+      "archive_url": "https://pub.dev/api/archives/mapvina_gl-1.0.1.tar.gz"
+    },
+    "mapvina_gl_web": {
+      "version": "1.0.1",
+      "archive_url": "https://pub.dev/api/archives/mapvina_gl_web-1.0.1.tar.gz"
+    },
+    "mapvina_gl_platform_interface": {
+      "version": "1.0.1",
+      "archive_url": "https://pub.dev/api/archives/mapvina_gl_platform_interface-1.0.1.tar.gz"
+    }
+  },
+  "npm": {
+    "name": "@mapvina-com/mapvina-react-native",
+    "version": "1.0.2"
+  },
+  "cocoapods_http": 404,
+  "annotation_namespace": {
+    "artifact": "android-plugin-annotation-v9:1.0.0",
+    "examples": [
+      "com/mapvina/android/plugins/annotation/Symbol.class",
+      "com/mapvina/android/plugins/annotation/SymbolManager.class"
+    ],
+    "io_github_plugin_class_count": 0
+  }
+}
